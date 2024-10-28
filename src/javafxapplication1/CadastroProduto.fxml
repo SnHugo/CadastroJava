@@ -98,11 +98,6 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField alignment="TOP_LEFT" blendMode="LIGHTEN" layoutX="12.0" layoutY="388.0" prefHeight="291.0" prefWidth="1256.0" promptText="Descrição" style="-fx-background-color: #FFF;">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </TextField>
       <Label layoutX="14.0" layoutY="367.0" prefHeight="21.0" prefWidth="118.0" text="Descrição">
          <font>
             <Font size="15.0" />
@@ -112,6 +107,11 @@
       <Button fx:id="btn_editar" layoutX="147.0" layoutY="328.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Editar" />
       <Button fx:id="btn_cancelar" layoutX="552.0" layoutY="687.0" mnemonicParsing="false" text="Cancelar" />
       <Button fx:id="btn_excluir" layoutX="1187.0" layoutY="328.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="Excluir" />
+      <TextField alignment="TOP_LEFT" blendMode="LIGHTEN" layoutX="12.0" layoutY="388.0" prefHeight="291.0" prefWidth="1256.0" promptText="Descrição" style="-fx-background-color: #FFF;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
    </children>
    <effect>
       <Blend />
