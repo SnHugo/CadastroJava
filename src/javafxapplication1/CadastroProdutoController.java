@@ -7,7 +7,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 
 public class CadastroProdutoController implements Initializable {
@@ -27,25 +30,56 @@ public class CadastroProdutoController implements Initializable {
     @FXML
     private Button btn_editar;
     
-    private String estadoFormulario = "inicial";
+    
     @FXML
     private Label label;
     
-        
     @FXML
-    public void initialize() {
-        atualizarBotoes();
-    }
+    private TextField textField_codigo;
+    
+    @FXML
+    private TextField textField_nome;
+    
+    @FXML
+    private TextField textField_preco;
+    
+    @FXML
+    private TextField textField_qtd;
+    
+    @FXML
+    private TextField textField_forn;
+    
+    @FXML
+    private TextField textField_marca;
+    
+    @FXML
+    private TextField textField_desc;
+    
+    @FXML
+    private ComboBox comboBox_tam;
+    
+    @FXML
+    private ComboBox comboBox_cat;
+    
+    @FXML
+    private DatePicker datePicker_dataCad;
+        
+    
+    @FXML
+    private String estadoFormulario = "inicial";
+    
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        atualizarBotoes();
     }    
     
     @FXML
     private void handleAdicionar() {
         estadoFormulario = "editando";
+        limparValores();
         atualizarBotoes();
         // Lógica para preparar o formulário para adição
     }
@@ -55,12 +89,15 @@ public class CadastroProdutoController implements Initializable {
         // Lógica para salvar os dados
         estadoFormulario = "adicionado";
         atualizarBotoes();
+        limparValores();
     }
+
 
     @FXML
     private void handleCancelar() {
         estadoFormulario = "inicial";
         atualizarBotoes();
+        limparValores();
         // Lógica para reverter alterações, se necessário
     }
 
@@ -68,7 +105,19 @@ public class CadastroProdutoController implements Initializable {
     private void handleExcluir() {
         estadoFormulario = "excluindo";
         atualizarBotoes();
+        limparValores();
         // Lógica para excluir dados
+        
+    }
+    @FXML    
+    private void limparValores(){
+        textField_nome.clear();
+        textField_codigo.clear();
+        textField_desc.clear();
+        textField_forn.clear();
+        textField_marca.clear();
+        textField_qtd.clear();
+        textField_preco.clear();
     }
     
     
