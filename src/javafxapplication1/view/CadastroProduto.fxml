@@ -25,12 +25,12 @@
             </Label>
          </children>
       </Pane>
-      <TextField layoutX="216.0" layoutY="83.0" prefHeight="31.0" prefWidth="797.0" promptText="Digite aqui...">
+      <TextField fx:id="textField_nome" layoutX="216.0" layoutY="83.0" prefHeight="31.0" prefWidth="797.0" promptText="Digite aqui...">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <TextField layoutX="14.0" layoutY="152.0" prefHeight="31.0" prefWidth="174.0" promptText="Digite aqui...">
+      <TextField fx:id="textField_preco" layoutX="14.0" layoutY="152.0" prefHeight="31.0" prefWidth="174.0" promptText="Digite aqui...">
          <font>
             <Font size="15.0" />
          </font>
@@ -45,7 +45,7 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField layoutX="216.0" layoutY="152.0" prefHeight="31.0" prefWidth="227.0" promptText="Digite aqui...">
+      <TextField fx:id="textField_qtd" layoutX="216.0" layoutY="152.0" prefHeight="31.0" prefWidth="227.0" promptText="Digite aqui...">
          <font>
             <Font size="15.0" />
          </font>
@@ -60,13 +60,13 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <DatePicker layoutX="14.0" layoutY="291.0" style="-fx-background-color: #AAA;" />
+      <DatePicker fx:id="datePicker_dataCad" layoutX="14.0" layoutY="291.0" style="-fx-background-color: #AAA;" />
       <Label layoutX="304.0" layoutY="203.0" text="Marca">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField layoutX="304.0" layoutY="224.0" prefHeight="31.0" prefWidth="227.0" promptText="Digite aqui...">
+      <TextField fx:id="textField_marca" layoutX="304.0" layoutY="224.0" prefHeight="31.0" prefWidth="227.0" promptText="Digite aqui...">
          <font>
             <Font size="15.0" />
          </font>
@@ -76,7 +76,7 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField layoutX="14.0" layoutY="83.0" prefHeight="31.0" prefWidth="174.0" promptText="Digite aqui...">
+      <TextField fx:id="textField_codigo" layoutX="14.0" layoutY="83.0" prefHeight="31.0" prefWidth="174.0" promptText="Digite aqui...">
          <font>
             <Font size="15.0" />
          </font>
@@ -86,13 +86,13 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField layoutX="469.0" layoutY="152.0" prefHeight="31.0" prefWidth="546.0" promptText="Digite aqui...">
+      <TextField fx:id="textField_forn" layoutX="469.0" layoutY="152.0" prefHeight="31.0" prefWidth="546.0" promptText="Digite aqui...">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <ComboBox layoutX="122.0" layoutY="224.0" prefHeight="31.0" prefWidth="150.0" />
-      <ComboBox layoutX="12.0" layoutY="224.0" prefHeight="31.0" prefWidth="83.0" />
+      <ComboBox fx:id="comboBox_cat" layoutX="122.0" layoutY="224.0" prefHeight="31.0" prefWidth="150.0" />
+      <ComboBox fx:id="comboBox_tam" layoutX="12.0" layoutY="224.0" prefHeight="31.0" prefWidth="83.0" />
       <Label layoutX="122.0" layoutY="203.0" text="Categoria">
          <font>
             <Font size="15.0" />
@@ -106,11 +106,12 @@
       <Button fx:id="btn_adicionar" layoutX="675.0" layoutY="687.0" mnemonicParsing="false" onAction="#handleAdicionar" text="Adicionar" />
       <Button fx:id="btn_cancelar" layoutX="552.0" layoutY="687.0" mnemonicParsing="false" onAction="#handleCancelar" text="Cancelar" />
       <Button fx:id="btn_excluir" layoutX="1187.0" layoutY="328.0" mnemonicParsing="false" onAction="#handleExcluir" prefHeight="25.0" prefWidth="64.0" text="Excluir" />
-      <TextField alignment="TOP_LEFT" blendMode="LIGHTEN" layoutX="12.0" layoutY="388.0" prefHeight="291.0" prefWidth="1256.0" promptText="Descrição" style="-fx-background-color: #FFF;">
+      <TextField fx:id="textField_desc" alignment="TOP_LEFT" blendMode="LIGHTEN" layoutX="12.0" layoutY="388.0" prefHeight="291.0" prefWidth="1256.0" promptText="Descrição" style="-fx-background-color: #FFF;">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
+      <Button fx:id="btn_ir_vendas" layoutX="1173.0" layoutY="687.0" mnemonicParsing="false" text="Ir para Vendas" />
    </children>
    <effect>
       <Blend />

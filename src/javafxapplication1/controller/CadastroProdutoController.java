@@ -1,5 +1,5 @@
 
-package javafxapplication1;
+package javafxapplication1.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,6 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafxapplication1.model.Produto;
 
 
 public class CadastroProdutoController implements Initializable {
@@ -30,6 +31,8 @@ public class CadastroProdutoController implements Initializable {
     @FXML
     private Button btn_editar;
     
+    @FXML
+    private Button btn_ir_vendas;
     
     @FXML
     private Label label;
@@ -79,17 +82,16 @@ public class CadastroProdutoController implements Initializable {
     @FXML
     private void handleAdicionar() {
         estadoFormulario = "editando";
-        limparValores();
         atualizarBotoes();
-        // Lógica para preparar o formulário para adição
     }
 
     @FXML
     private void handleSalvar() {
-        // Lógica para salvar os dados
         estadoFormulario = "adicionado";
         atualizarBotoes();
         limparValores();
+        // Lógica para salvar os dados
+        
     }
 
 
@@ -109,7 +111,7 @@ public class CadastroProdutoController implements Initializable {
         // Lógica para excluir dados
         
     }
-    @FXML    
+    @FXML
     private void limparValores(){
         textField_nome.clear();
         textField_codigo.clear();
@@ -119,7 +121,6 @@ public class CadastroProdutoController implements Initializable {
         textField_qtd.clear();
         textField_preco.clear();
     }
-    
     
     private void atualizarBotoes() {
         switch (estadoFormulario) {
