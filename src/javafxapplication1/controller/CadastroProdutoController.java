@@ -1,5 +1,5 @@
 
-package javafxapplication1;
+package javafxapplication1.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,6 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafxapplication1.model.Produto;
 
 
 public class CadastroProdutoController implements Initializable {
@@ -79,7 +80,6 @@ public class CadastroProdutoController implements Initializable {
     @FXML
     private void handleAdicionar() {
         estadoFormulario = "editando";
-        limparValores();
         atualizarBotoes();
         // Lógica para preparar o formulário para adição
     }
@@ -105,7 +105,6 @@ public class CadastroProdutoController implements Initializable {
     private void handleExcluir() {
         estadoFormulario = "excluindo";
         atualizarBotoes();
-        limparValores();
         // Lógica para excluir dados
         
     }
