@@ -4,11 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/main/JavaFXApplication1.java</file>
-            <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/controller/CadastroProdutoController.java</file>
+            <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/model/dao/ProdutoDAOImpl.java</file>
             <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/model/Produto.java</file>
-            <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/view/CadastroProduto.fxml</file>
-            <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/controller/VendaProdutoController.java</file>
-            <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/view/VendaProduto.fxml</file>
+            <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/controller/CadastroProdutoController.java</file>
+            <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/model/dao/ProdutoDAO.java</file>
         </group>
     </open-files>
 </project-private>

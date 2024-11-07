@@ -3,7 +3,7 @@ package javafxapplication1.model;
 
 
 public class Produto {
-    private int codigo;
+    private String codigo;
     private String nome;
     private double preco;
     private int qtd;
@@ -14,7 +14,7 @@ public class Produto {
     private String data_cadastro;
     private String desc;
 
-    public Produto(int codigo, String nome, double preco, int qtd, String fornecedor, String tamanho, String categoria, String marca, String data_cadastro, String desc) {
+    public Produto(String codigo, String nome, double preco, int qtd, String fornecedor, String tamanho, String categoria, String marca, String data_cadastro, String desc) {
         this.codigo = codigo;
         this.nome = nome;
         this.preco = preco;
@@ -27,13 +27,14 @@ public class Produto {
         this.desc = desc;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
+
 
     public String getNome() {
         return nome;
