@@ -36,6 +36,10 @@ public class ProdutoDAOImpl implements ProdutoDAO {
         });
     }
 
+    public void deletar(String id) {
+        lista.removeIf(Produto -> Produto.getCodigo().equals(id));
+    }
+    
     @Override
     public Produto buscarPorId(String codigo) {
         return lista.stream()

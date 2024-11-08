@@ -1,20 +1,33 @@
 
 package javafxapplication1.controller;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javafxapplication1.model.Produto;
+import javafxapplication1.model.dao.ProdutoDAOImpl;
 
 
 public class CadastroProdutoController implements Initializable {
+    
+    private ProdutoDAOImpl produtoDAO;
+    
     
     @FXML
     private Button btn_cancelar;
@@ -31,6 +44,8 @@ public class CadastroProdutoController implements Initializable {
     @FXML
     private Button btn_editar;
     
+    @FXML
+    private Button btn_listar;
     
     @FXML
     private Label label;
@@ -70,11 +85,13 @@ public class CadastroProdutoController implements Initializable {
     private String estadoFormulario = "inicial";
     
     
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        produtoDAO = new ProdutoDAOImpl();
+        comboBox_tam.getItems().addAll("P", "M", "G", "GG");
+        comboBox_cat.getItems().addAll("Camiseta", "Calça", "Vestido");
         atualizarBotoes();
+        
     }    
     
     @FXML
@@ -87,9 +104,34 @@ public class CadastroProdutoController implements Initializable {
     @FXML
     private void handleSalvar() {
         // Lógica para salvar os dados
-        estadoFormulario = "adicionado";
+        if (estadoFormulario == "excluindo") {
+            String codigo = textField_codigo.getText();
+            produtoDAO.deletar(codigo);
+            System.out.println(produtoDAO.listarTodos());
+            estadoFormulario = "salvo";
+            
+            atualizarBotoes();
+            limparValores();
+            return;
+        }
+        String codigo = textField_codigo.getText();
+        String nome = textField_nome.getText();
+        double preco = Double.parseDouble(textField_preco.getText());
+        int quantidade = Integer.parseInt(textField_qtd.getText());
+        String fornecedor = textField_forn.getText();
+        String marca = textField_marca.getText();
+        String descricao = textField_desc.getText();
+        String tamanho = comboBox_tam.getValue().toString();
+        String categoria = comboBox_cat.getValue().toString();
+        String dataCadastro = datePicker_dataCad.getValue().toString();
+        
+        Produto produto = new Produto(codigo, nome, preco, quantidade, fornecedor, tamanho, categoria, marca, dataCadastro, descricao);
+        produtoDAO.salvar(produto);
+        estadoFormulario = "salvo";
+ 
         atualizarBotoes();
         limparValores();
+        System.out.println(produtoDAO.listarTodos());
     }
 
 
@@ -103,6 +145,7 @@ public class CadastroProdutoController implements Initializable {
 
     @FXML
     private void handleExcluir() {
+        String codigo = textField_codigo.getText();
         estadoFormulario = "excluindo";
         atualizarBotoes();
         // Lógica para excluir dados
@@ -117,6 +160,18 @@ public class CadastroProdutoController implements Initializable {
         textField_marca.clear();
         textField_qtd.clear();
         textField_preco.clear();
+    }
+    
+    @FXML
+    private void mudarParaListarProdutos(ActionEvent event)throws IOException {
+        Parent novaTela = FXMLLoader.load(getClass().getResource("/javafxapplication1/view/Listar.fxml"));
+        Scene novaCena = new Scene(novaTela);
+        
+        Stage novoPalco = new Stage();
+        novoPalco.setScene(novaCena);
+        novoPalco.show();
+        
+        
     }
     
     
@@ -134,7 +189,7 @@ public class CadastroProdutoController implements Initializable {
                 btn_cancelar.setDisable(false);
                 btn_excluir.setDisable(true);
                 break;
-            case "adicionado":
+            case "salvo":
                 btn_adicionar.setDisable(false);
                 btn_salvar.setDisable(true);
                 btn_cancelar.setDisable(true);
@@ -142,7 +197,7 @@ public class CadastroProdutoController implements Initializable {
                 break;
             case "excluindo":
                 btn_adicionar.setDisable(true);
-                btn_salvar.setDisable(true);
+                btn_salvar.setDisable(false);
                 btn_cancelar.setDisable(false);
                 btn_excluir.setDisable(true);
                 break;
