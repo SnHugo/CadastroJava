@@ -3,6 +3,7 @@ package javafxapplication1.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -27,7 +28,6 @@ import javafxapplication1.model.dao.ProdutoDAOImpl;
 public class CadastroProdutoController implements Initializable {
     
     private ProdutoDAOImpl produtoDAO;
-    
     
     @FXML
     private Button btn_cancelar;
@@ -84,6 +84,7 @@ public class CadastroProdutoController implements Initializable {
     @FXML
     private String estadoFormulario = "inicial";
     
+    private ListarController listarController;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -127,8 +128,9 @@ public class CadastroProdutoController implements Initializable {
         
         Produto produto = new Produto(codigo, nome, preco, quantidade, fornecedor, tamanho, categoria, marca, dataCadastro, descricao);
         produtoDAO.salvar(produto);
+        listarController.getProdutos().add(produto);
+        
         estadoFormulario = "salvo";
- 
         atualizarBotoes();
         limparValores();
         System.out.println(produtoDAO.listarTodos());
@@ -163,17 +165,21 @@ public class CadastroProdutoController implements Initializable {
     }
     
     @FXML
-    private void mudarParaListarProdutos(ActionEvent event)throws IOException {
-        Parent novaTela = FXMLLoader.load(getClass().getResource("/javafxapplication1/view/Listar.fxml"));
-        Scene novaCena = new Scene(novaTela);
+    private void mudarParaListarProdutos() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/javafxapplication1/view/Listar.fxml"));
+        Parent novaTela = loader.load();
         
+        ListarController listarController = loader.getController();
+        listarController.setProdutos(this.listarController.getProdutos());
+        Scene novaCena = new Scene(novaTela);
         Stage novoPalco = new Stage();
         novoPalco.setScene(novaCena);
-        novoPalco.show();
-        
-        
+        novoPalco.show();   
     }
     
+    public void setListarController(ListarController listarController) {
+        this.listarController = listarController;
+    }
     
     private void atualizarBotoes() {
         switch (estadoFormulario) {

@@ -5,6 +5,8 @@ import javafxapplication1.model.Produto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 public class ProdutoDAOImpl implements ProdutoDAO {
@@ -36,6 +38,7 @@ public class ProdutoDAOImpl implements ProdutoDAO {
         });
     }
 
+    @Override
     public void deletar(String id) {
         lista.removeIf(Produto -> Produto.getCodigo().equals(id));
     }
@@ -54,6 +57,10 @@ public class ProdutoDAOImpl implements ProdutoDAO {
     }
 
    
+    @Override
+    public ObservableList<Produto> listaObservable() {
+        return FXCollections.observableArrayList(lista);
+    }
 
     
 }
