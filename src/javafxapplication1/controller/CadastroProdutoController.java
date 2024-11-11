@@ -109,8 +109,9 @@ public class CadastroProdutoController implements Initializable {
             String codigo = textField_codigo.getText();
             produtoDAO.deletar(codigo);
             System.out.println(produtoDAO.listarTodos());
-            estadoFormulario = "salvo";
+            listarController.getProdutos().removeIf(Produto -> Produto.getCodigo().equals(codigo));
             
+            estadoFormulario = "salvo";
             atualizarBotoes();
             limparValores();
             return;

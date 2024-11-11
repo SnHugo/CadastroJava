@@ -82,4 +82,9 @@ public class ListarController implements Initializable {
         this.produtos = produtos;
         tabela.setItems(this.produtos);
     }
+    
+    public void removeProduto(String id) {
+        produtos.removeIf(Produto -> Produto.getCodigo().equals(id));
+    }
+
 }
