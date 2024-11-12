@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafxapplication1.controller.CadastroProdutoController;
 import javafxapplication1.controller.ListarController;
+import javafxapplication1.controller.VendaProdutoController;
 
 public class JavaFXApplication1 extends Application {
     
@@ -16,11 +17,17 @@ public class JavaFXApplication1 extends Application {
         Scene cadastroScene = new Scene(cadastroLoader.load()); CadastroProdutoController cadastroController = cadastroLoader.getController();
         primaryStage.setScene(cadastroScene);
         primaryStage.setTitle("Cadastro de Produtos");
-        
         primaryStage.show();
+        
         FXMLLoader listarLoader = new FXMLLoader(getClass().getResource("/javafxapplication1/view/Listar.fxml"));
-        Scene listarScene = new Scene(listarLoader.load()); ListarController listarController = listarLoader.getController();
+        Scene listarScene = new Scene(listarLoader.load());
+        ListarController listarController = listarLoader.getController();
         cadastroController.setListarController(listarController);
+    
+    
+        FXMLLoader vendaLoader = new FXMLLoader(getClass().getResource("/javafxapplication1/view/VendaProduto.fxml"));
+        Scene cenaVenda = new Scene(vendaLoader.load());
+        VendaProdutoController vendaProduto = vendaLoader.getController();
     }
 
     

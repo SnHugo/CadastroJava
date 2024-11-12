@@ -1,5 +1,6 @@
 package javafxapplication1.controller;
 
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,10 +8,14 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafxapplication1.model.dao.ProdutoDAOImpl;
 import javafxapplication1.model.Produto;
 
@@ -18,8 +23,12 @@ public class ListarController implements Initializable {
 
     private ProdutoDAOImpl produtoDAO;
 
+    private CadastroProdutoController cadastroController;
+
+    private Stage cadastroStage;
+
     @FXML
-    private TableView<Produto> tabela;
+    protected TableView<Produto> tabela;
 
     @FXML
     private TableColumn<Produto, String> colunaCodigo;
@@ -52,13 +61,22 @@ public class ListarController implements Initializable {
     private TableColumn<Produto, String> colunaData;
 
     private ObservableList<Produto> produtos = FXCollections.observableArrayList();
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         produtoDAO = new ProdutoDAOImpl();
         configurarColunas();
         tabela.setItems(produtos);
-        
+
+        tabela.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                Produto produtoSelecionado = tabela.getSelectionModel().getSelectedItem();
+                if (produtoSelecionado != null) {
+                    mostrarTelaDeCadastro(produtoSelecionado);
+                }
+            }
+        });
+
     }
 
     private void configurarColunas() {
@@ -77,14 +95,36 @@ public class ListarController implements Initializable {
     public ObservableList<Produto> getProdutos() {
         return produtos;
     }
-    
+
     public void setProdutos(ObservableList<Produto> produtos) {
         this.produtos = produtos;
         tabela.setItems(this.produtos);
     }
-    
+
     public void removeProduto(String id) {
         produtos.removeIf(Produto -> Produto.getCodigo().equals(id));
+    }
+
+    private void mostrarTelaDeCadastro(Produto produto) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/javafxapplication1/view/fxml"));
+            Parent root = loader.load();
+
+            cadastroController = loader.getController();
+
+            cadastroStage = new Stage();
+            cadastroStage.setScene(new Scene(root));
+            cadastroStage.setTitle("Cadastro de Produto");
+
+            cadastroController.estadoFormulario = "editando existente";
+            cadastroController.atualizarBotoes();
+            cadastroController.preencherCampos(produto);
+            cadastroStage.show();
+            cadastroStage.toFront();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

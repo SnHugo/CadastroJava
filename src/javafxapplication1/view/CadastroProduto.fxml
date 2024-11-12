@@ -113,7 +113,7 @@
             <Font size="15.0" />
          </font>
       </TextField>
-      <Button fx:id="btn_ir_vender" layoutX="1173.0" layoutY="687.0" mnemonicParsing="false" text="Ir para Vender" />
+      <Button fx:id="btn_ir_vender" layoutX="1173.0" layoutY="687.0" mnemonicParsing="false" onAction="#mudarParaVender" text="Ir para Vender" />
       <Button fx:id="btn_listar" layoutX="1028.0" layoutY="687.0" mnemonicParsing="false" onAction="#mudarParaListarProdutos" text="Listar Cadastrados" />
    </children>
    <effect>

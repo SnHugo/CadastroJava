@@ -8,7 +8,10 @@
             <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/model/dao/ProdutoDAOImpl.java</file>
             <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/model/Produto.java</file>
             <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/controller/CadastroProdutoController.java</file>
+            <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/view/Listar.fxml</file>
             <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/model/dao/ProdutoDAO.java</file>
+            <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/controller/VendaProdutoController.java</file>
+            <file>file:/C:/Users/augus/Documents/NetBeansProjects/CadastroJava/src/javafxapplication1/view/VendaProduto.fxml</file>
         </group>
     </open-files>
 </project-private>

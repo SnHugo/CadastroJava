@@ -106,17 +106,20 @@
       </Label>
       <Button fx:id="btn_cancelar" layoutX="532.0" layoutY="686.0" mnemonicParsing="false" text="Cancelar" />
       <Button fx:id="btn_adicionar" layoutX="682.0" layoutY="686.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Vender" />
-      <Button layoutX="305.0" layoutY="301.0" mnemonicParsing="false" text="Adicionar" />
+      <Button fx:id="btn_adicionar" layoutX="305.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleAdicionar" text="Adicionar" />
       <Label layoutX="568.0" layoutY="370.0" text="Produtos adicionados">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="textField_desc1" alignment="TOP_LEFT" blendMode="LIGHTEN" layoutX="568.0" layoutY="391.0" prefHeight="291.0" prefWidth="700.0" style="-fx-background-color: #FFF;">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </TextField>
       <Button layoutX="217.0" layoutY="301.0" mnemonicParsing="false" text="Remover" />
+      <TableView fx:id="tabelaAdicionados" layoutX="568.0" layoutY="391.0" prefHeight="291.0" prefWidth="699.0">
+        <columns>
+            <TableColumn fx:id="colunaCodigo" prefWidth="99.0" text="Codigo" />
+            <TableColumn fx:id="colunaNome" minWidth="8.0" prefWidth="199.0" text="Nome" />
+            <TableColumn fx:id="colunaPreco" minWidth="0.0" prefWidth="116.0" text="Preco" />
+            <TableColumn fx:id="colunaQtd" prefWidth="55.0" text="Qtd" />
+        </columns>
+      </TableView>
    </children>
 </Pane>

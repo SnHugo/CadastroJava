@@ -11,8 +11,8 @@
    <children>
       <TableView fx:id="tabela" fixedCellSize="0.0" prefHeight="600.0" prefWidth="900.0">
         <columns>
-          <TableColumn fx:id="colunaCodigo" prefWidth="75.0" text="Codigo" />
-          <TableColumn fx:id="colunaNome" prefWidth="98.0" text="Nome" />
+            <TableColumn fx:id="colunaCodigo" prefWidth="75.0" text="Codigo" />
+            <TableColumn fx:id="colunaNome" prefWidth="98.0" text="Nome" />
             <TableColumn fx:id="colunaPreco" prefWidth="77.0" text="Preco" />
             <TableColumn fx:id="colunaQtd" prefWidth="50.0" text="Qtd" />
             <TableColumn fx:id="colunaForn" prefWidth="75.0" text="Fornecedor" />
