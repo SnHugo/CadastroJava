@@ -1,4 +1,3 @@
-
 package javafxapplication1.model.dao;
 
 import javafxapplication1.model.Produto;
@@ -8,22 +7,33 @@ import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-
 public class ProdutoDAOImpl implements ProdutoDAO {
+
     private List<Produto> lista = new ArrayList<>();
+    
+    private static ProdutoDAOImpl instance;
+    
+    private ProdutoDAOImpl() {}
+    
+    public static ProdutoDAOImpl getInstance() {
+        if (instance == null) {
+            instance = new ProdutoDAOImpl();
+        }
+        return instance;
+    }
     
     @Override
     public void salvar(Produto produto) {
         lista.add(produto);
     }
-    
+
     @Override
     public void atualizar(Produto produto) {
         Optional<Produto> listaExistente;
         listaExistente = lista.stream()
                 .filter(c -> c.getCodigo().equals(produto.getCodigo()))
                 .findFirst();
-        
+
         listaExistente.ifPresent(c -> {
             c.setCodigo(produto.getCodigo());
             c.setNome(produto.getNome());
@@ -42,25 +52,25 @@ public class ProdutoDAOImpl implements ProdutoDAO {
     public void deletar(String id) {
         lista.removeIf(Produto -> Produto.getCodigo().equals(id));
     }
-    
+
     @Override
     public Produto buscarPorId(String codigo) {
-        return lista.stream()
-                .filter(Produto -> Produto.getCodigo().equals(codigo))
-                .findFirst()
-                .orElse(null);
+        for (Produto produto : listarTodos()) {
+            if (produto.getCodigo().equals(codigo)) {
+                return produto;
+            }
+        }
+        return null;
     }
-    
+
     @Override
     public List<Produto> listarTodos() {
         return lista;
     }
 
-   
     @Override
     public ObservableList<Produto> listaObservable() {
         return FXCollections.observableArrayList(lista);
     }
 
-    
 }

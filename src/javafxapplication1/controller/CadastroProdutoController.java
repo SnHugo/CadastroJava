@@ -25,7 +25,7 @@ import javafxapplication1.model.dao.ProdutoDAOImpl;
 
 public class CadastroProdutoController implements Initializable {
 
-    private ProdutoDAOImpl produtoDAO;
+    private ProdutoDAOImpl produtoDAO = ProdutoDAOImpl.getInstance();
 
     @FXML
     private Button btn_cancelar;
@@ -51,6 +51,9 @@ public class CadastroProdutoController implements Initializable {
     @FXML
     private Label label;
 
+    @FXML
+    private Button btn_pesquisar;
+            
     @FXML
     private TextField textField_codigo;
 
@@ -90,7 +93,6 @@ public class CadastroProdutoController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        produtoDAO = new ProdutoDAOImpl();
         comboBox_tam.getItems().addAll("P", "M", "G", "GG");
         comboBox_cat.getItems().addAll("Camiseta", "Calça", "Vestido");
         atualizarBotoes();
@@ -131,8 +133,15 @@ public class CadastroProdutoController implements Initializable {
             produtoAtual.setData_cadastro(datePicker_dataCad.getValue().toString());
 
             produtoDAO.atualizar(produtoAtual);
-            listarController.tabela.refresh();
+            
+            if (listarController != null) {
+                ObservableList<Produto> produtosAtualizados = produtoDAO.listaObservable();
+                listarController.setProdutos(produtosAtualizados);
+            }
             limparValores();
+            
+            estadoFormulario = "salvo";
+            atualizarBotoes();
             return;
         }
         String codigo = textField_codigo.getText();
@@ -145,7 +154,9 @@ public class CadastroProdutoController implements Initializable {
         String tamanho = comboBox_tam.getValue().toString();
         String categoria = comboBox_cat.getValue().toString();
         String dataCadastro = datePicker_dataCad.getValue().toString();
-
+        if (produtoDAO.buscarPorId(codigo) != null) {
+            return;
+        }
         Produto produto = new Produto(codigo, nome, preco, quantidade, fornecedor, tamanho, categoria, marca, dataCadastro, descricao);
         produtoDAO.salvar(produto);
         listarController.getProdutos().add(produto);
@@ -189,8 +200,12 @@ public class CadastroProdutoController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/javafxapplication1/view/Listar.fxml"));
         Parent novaTela = loader.load();
 
-        ListarController listarController = loader.getController();
-        listarController.setProdutos(this.listarController.getProdutos());
+        ListarController listarControllerLocal = loader.getController();
+        
+        ObservableList<Produto> produtos = produtoDAO.listaObservable();
+        listarControllerLocal.setProdutos(produtos);
+        this.listarController = listarControllerLocal;
+        
         Scene novaCena = new Scene(novaTela);
         Stage novoPalco = new Stage();
         novoPalco.setScene(novaCena);
@@ -202,6 +217,8 @@ public class CadastroProdutoController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/javafxapplication1/view/VendaProduto.fxml"));
         Parent telaVendas = loader.load();
         VendaProdutoController vendaProduto = loader.getController();
+        
+        vendaProduto.setProdutos(produtoDAO.listarTodos());
         Scene cenaVenda = new Scene(telaVendas);
         Stage palcoVenda = new Stage();
         palcoVenda.setScene(cenaVenda);
@@ -209,8 +226,22 @@ public class CadastroProdutoController implements Initializable {
     }
 
     
+    @FXML
+    private void handlePesquisar() {
+        String codigo = textField_codigo.getText();
+        
+        Produto produto = produtoDAO.buscarPorId(codigo);
+        
+        if (produto != null) {
+            preencherCampos(produto);
+            return;
+        }
+    }
+    
     public void preencherCampos(Produto produto) {
         this.produtoAtual = produto;
+        estadoFormulario = "editando existente";
+        atualizarBotoes();
         textField_codigo.setText(produto.getCodigo());
         textField_nome.setText(produto.getNome());
         textField_preco.setText(String.valueOf(produto.getPreco()));
@@ -235,30 +266,35 @@ public class CadastroProdutoController implements Initializable {
                 btn_salvar.setDisable(true);
                 btn_cancelar.setDisable(true);
                 btn_excluir.setDisable(false);
+                btn_pesquisar.setDisable(false);
                 break;
             case "editando":
                 btn_adicionar.setDisable(true);
                 btn_salvar.setDisable(false);
                 btn_cancelar.setDisable(false);
                 btn_excluir.setDisable(true);
+                btn_pesquisar.setDisable(true);
                 break;
             case "editando existente":
                 btn_adicionar.setDisable(true);
                 btn_salvar.setDisable(false);
                 btn_cancelar.setDisable(false);
                 btn_excluir.setDisable(true);
+                btn_pesquisar.setDisable(true);
                 break;
             case "salvo":
                 btn_adicionar.setDisable(false);
                 btn_salvar.setDisable(true);
                 btn_cancelar.setDisable(true);
                 btn_excluir.setDisable(false);
+                btn_pesquisar.setDisable(false);
                 break;
             case "excluindo":
                 btn_adicionar.setDisable(true);
                 btn_salvar.setDisable(false);
                 btn_cancelar.setDisable(false);
                 btn_excluir.setDisable(true);
+                btn_pesquisar.setDisable(true);
                 break;
         }
     }

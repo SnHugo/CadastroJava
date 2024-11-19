@@ -104,15 +104,15 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Button fx:id="btn_cancelar" layoutX="532.0" layoutY="686.0" mnemonicParsing="false" text="Cancelar" />
-      <Button fx:id="btn_adicionar" layoutX="682.0" layoutY="686.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Vender" />
-      <Button fx:id="btn_adicionar" layoutX="305.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleAdicionar" text="Adicionar" />
+      <Button fx:id="btn_cancelar" layoutX="532.0" layoutY="686.0" mnemonicParsing="false" onAction="#handleCancelar" text="Cancelar" />
+      <Button fx:id="btn_vender" layoutX="682.0" layoutY="686.0" mnemonicParsing="false" onAction="#handleVender" prefHeight="25.0" prefWidth="61.0" text="Vender" />
+      <Button fx:id="btn_adicionar" layoutX="1199.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleAdicionar" text="Adicionar" />
       <Label layoutX="568.0" layoutY="370.0" text="Produtos adicionados">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Button layoutX="217.0" layoutY="301.0" mnemonicParsing="false" text="Remover" />
+      <Button fx:id="btn_remover" layoutX="217.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleRemover" text="Remover" />
       <TableView fx:id="tabelaAdicionados" layoutX="568.0" layoutY="391.0" prefHeight="291.0" prefWidth="699.0">
         <columns>
             <TableColumn fx:id="colunaCodigo" prefWidth="99.0" text="Codigo" />
@@ -121,5 +121,6 @@
             <TableColumn fx:id="colunaQtd" prefWidth="55.0" text="Qtd" />
         </columns>
       </TableView>
+      <Button fx:id="btn_pesquisar" layoutX="305.0" layoutY="301.0" mnemonicParsing="false" onAction="#handlePesquisar" text="Pesquisar" />
    </children>
 </Pane>

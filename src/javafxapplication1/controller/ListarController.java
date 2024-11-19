@@ -21,7 +21,7 @@ import javafxapplication1.model.Produto;
 
 public class ListarController implements Initializable {
 
-    private ProdutoDAOImpl produtoDAO;
+    private ProdutoDAOImpl produtoDAO = ProdutoDAOImpl.getInstance();
 
     private CadastroProdutoController cadastroController;
 
@@ -62,21 +62,15 @@ public class ListarController implements Initializable {
 
     private ObservableList<Produto> produtos = FXCollections.observableArrayList();
 
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        produtoDAO = new ProdutoDAOImpl();
         configurarColunas();
+        tabela.refresh();
         tabela.setItems(produtos);
 
-        tabela.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 1) {
-                Produto produtoSelecionado = tabela.getSelectionModel().getSelectedItem();
-                if (produtoSelecionado != null) {
-                    mostrarTelaDeCadastro(produtoSelecionado);
-                }
-            }
-        });
-
+        
+       
     }
 
     private void configurarColunas() {
@@ -98,6 +92,7 @@ public class ListarController implements Initializable {
 
     public void setProdutos(ObservableList<Produto> produtos) {
         this.produtos = produtos;
+        tabela.refresh();
         tabela.setItems(this.produtos);
     }
 
@@ -105,26 +100,6 @@ public class ListarController implements Initializable {
         produtos.removeIf(Produto -> Produto.getCodigo().equals(id));
     }
 
-    private void mostrarTelaDeCadastro(Produto produto) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/javafxapplication1/view/fxml"));
-            Parent root = loader.load();
-
-            cadastroController = loader.getController();
-
-            cadastroStage = new Stage();
-            cadastroStage.setScene(new Scene(root));
-            cadastroStage.setTitle("Cadastro de Produto");
-
-            cadastroController.estadoFormulario = "editando existente";
-            cadastroController.atualizarBotoes();
-            cadastroController.preencherCampos(produto);
-            cadastroStage.show();
-            cadastroStage.toFront();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    
 
 }

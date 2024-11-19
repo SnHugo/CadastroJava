@@ -115,6 +115,7 @@
       </TextField>
       <Button fx:id="btn_ir_vender" layoutX="1173.0" layoutY="687.0" mnemonicParsing="false" onAction="#mudarParaVender" text="Ir para Vender" />
       <Button fx:id="btn_listar" layoutX="1028.0" layoutY="687.0" mnemonicParsing="false" onAction="#mudarParaListarProdutos" text="Listar Cadastrados" />
+      <Button fx:id="btn_pesquisar" layoutX="96.0" layoutY="327.0" mnemonicParsing="false" onAction="#handlePesquisar" prefHeight="25.0" prefWidth="83.0" text="Pesquisar" />
    </children>
    <effect>
       <Blend />
